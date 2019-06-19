@@ -22,6 +22,6 @@ public interface UserMapper {
     @Select("select * from ec_user where active=#{uuid}")
     User findEmailUser(@Param("uuid") String uuid);
 
-    @Update("update ec_user set disabled=#{disabled} where id=#{userId}")
-    void updateUserDisabled(@Param("disabled") Integer disabled,@Param("userId") Integer userId);
+    @Update("update ec_user set role=#{role} where id=#{userId}")
+    void updateUserDisabled(@Param("role") Integer role,@Param("userId") Integer userId);
 }

@@ -32,7 +32,7 @@ public class IndexServlet implements IIndexServlet {
             return "该用户名不存在！";
         }else if (!user.getPassword().equals(password)){
             return "密码不正确!";
-        }else if(user.getDisabled()==0){
+        }else if(user.getRole()==0){
             System.out.println("loginServlet:进入user.getDisabled()");
             return "该用户为激活！请前往您的邮箱激活账户！";
         }else{
@@ -112,7 +112,7 @@ public class IndexServlet implements IIndexServlet {
                     String format = df.format(date);
                     user.setCreateDate(format);
                     user.setActive(uuid);
-                    user.setDisabled(0);
+                    user.setRole(0);
                     userMapper.insertUser(user);
                     GetMapperUtil.sqlCommit();
                     String url = "http://localhost:8080/shopping2_0_war/user/email?id="+uuid;
