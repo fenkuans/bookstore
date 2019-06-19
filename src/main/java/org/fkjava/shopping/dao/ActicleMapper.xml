@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fkjava.shopping.dao.ActicleMapper">
+    <select id="shoppingFind" parameterType="String" resultMap="articleMap">
+        select * from ec_article
+        <if test="#{typeCode}!=null or #{typeCode} neq ''">
+         <where>
+                type_code like '${typeCode}%'
+         </where>
+    </if>
+            limit #{pageNumb.startPage},#{pageNumb.showNumb};
+    </select>
+
+    <resultMap id="articleMap" type="article">
+        <id property="id" column="id"/>
+        <result property="typeCode" column="type_code"/>
+        <result property="putawayDate" column="putaway_date"/>
+        <result property="createDate" column="create_Date"/>
+    </resultMap>
+</mapper>

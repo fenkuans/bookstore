@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.fkjava.shopping.dao.ShopCarMapper">
+    <select id="selectUserCarArticle" parameterType="Integer" resultMap="shopCar">
+        select * from ec_car where article_id=#{articleId} and user_id=#{userId}
+    </select>
+
+    <select id="getUserCarData" parameterType="Integer" resultMap="shopCar">
+        select * from ec_car where user_id=#{userId}
+    </select>
+
+    <select id="finalCarData" parameterType="Integer" resultMap="shopData">
+        select a.image,a.title,a.price,c.article_numb,c.user_id,a.id from ec_article a inner join ec_car c where a.id=c.article_id and c.user_id=#{userId}
+    </select>
+    <select id="finalCarDataOne" parameterType="Integer" resultMap="shopData">
+        select a.image,a.title,a.price,c.article_numb,c.user_id,a.id from ec_article a inner join ec_car c where a.id=c.article_id and c.user_id=#{userId} and a.id=#{articleId}
+    </select>
+    <resultMap id="shopData" type="shopCarData">
+        <result property="articleId" column="id"/>
+        <result property="articleNumb" column="article_numb"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+    <resultMap id="shopCar" type="car">
+        <id property="id" column="id"/>
+        <result property="articleId" column="article_id"/>
+        <result property="articleNumb" column="article_numb"/>
+        <result property="userId" column="user_id"/>
+    </resultMap>
+</mapper>
